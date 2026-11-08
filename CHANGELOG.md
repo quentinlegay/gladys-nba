@@ -10,6 +10,8 @@ the notes of the version's GitHub Release.
 
 ## [Unreleased]
 
+## [1.0.1] - 2026-11-08
+
 ### Added
 
 - An "NBA" calendar per Gladys user who enables the integration, filled with
