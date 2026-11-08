@@ -10,6 +10,8 @@ the notes of the version's GitHub Release.
 
 ## [Unreleased]
 
+## [1.0.1] - 2026-11-08
+
 ### Added
 
 - An "NBA" calendar per Gladys user who enables the integration, filled with
@@ -22,3 +24,6 @@ the notes of the version's GitHub Release.
   spoiler).
 - A "Synchronize now" button reporting, user by user, the games added and the
   games left out by the window.
+
+[Unreleased]: https://github.com/quentinlegay/gladys-nba/compare/v1.0.1...HEAD
+[1.0.1]: https://github.com/quentinlegay/gladys-nba/releases/tag/v1.0.1
