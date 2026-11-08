@@ -2,7 +2,13 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { parseGame, parseScoreboard } from '../src/espn/parse.js';
-import { createEspnClient, EspnError, espnDate } from '../src/espn/client.js';
+import {
+  SCOREBOARD_URL,
+  createEspnClient,
+  EspnError,
+  espnDate,
+  espnDays,
+} from '../src/espn/client.js';
 import { parseTeams, teamCode } from '../src/nba/teams.js';
 
 const scoreboard = JSON.parse(
@@ -68,23 +74,41 @@ test('team codes accept the usual NBA spellings', () => {
   assert.deepEqual(parseTeams(undefined), { teams: [], unknown: [] });
 });
 
-test('the client asks ESPN for a range of days and reports failures', async () => {
+test('the client reads a range day by day and merges the games', async () => {
   const urls = [];
   const client = createEspnClient({
     fetch: async (url) => {
       urls.push(url);
+      // Every day answers the whole fixture: the merge must list each game once.
       return { ok: true, json: async () => scoreboard };
     },
   });
-  const json = await client.scoreboard(Date.parse('2026-11-06T12:00:00Z'), '2026-11-30T00:00:00Z');
-  assert.equal(json, scoreboard);
-  assert.match(urls[0], /basketball\/nba\/scoreboard\?dates=20261106-20261130&limit=1000$/);
+  const json = await client.scoreboard(Date.parse('2026-11-06T12:00:00Z'), '2026-11-09T00:00:00Z');
+  assert.deepEqual(urls.sort(), [
+    `${SCOREBOARD_URL}?dates=20261106`,
+    `${SCOREBOARD_URL}?dates=20261107`,
+    `${SCOREBOARD_URL}?dates=20261108`,
+    `${SCOREBOARD_URL}?dates=20261109`,
+  ]);
+  assert.equal(json.events.length, scoreboard.events.length);
+  assert.equal(parseScoreboard(json).length, 8);
   assert.equal(espnDate('2026-01-02T23:59:00Z'), '20260102');
+  assert.deepEqual(espnDays('2026-12-31T23:00:00Z', '2027-01-01T01:00:00Z'), [
+    '20261231',
+    '20270101',
+  ]);
+});
 
-  const down = createEspnClient({ fetch: async () => ({ ok: false, status: 503 }) });
+test('one failing day fails the whole read', async () => {
+  const flaky = createEspnClient({
+    fetch: async (url) =>
+      url.endsWith('20261107')
+        ? { ok: false, status: 400 }
+        : { ok: true, json: async () => ({ events: [] }) },
+  });
   await assert.rejects(
-    down.scoreboard(0, 0),
-    (err) => err instanceof EspnError && err.status === 503,
+    flaky.scoreboard('2026-11-06T00:00:00Z', '2026-11-08T00:00:00Z'),
+    (err) => err instanceof EspnError && err.status === 400,
   );
   const offline = createEspnClient({
     fetch: async () => {

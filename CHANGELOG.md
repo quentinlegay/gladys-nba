@@ -22,3 +22,8 @@ the notes of the version's GitHub Release.
   spoiler).
 - A "Synchronize now" button reporting, user by user, the games added and the
   games left out by the window.
+
+### Fixed
+
+- ESPN answered HTTP 400 to the multi-week date range: the schedule is now
+  read day by day.
