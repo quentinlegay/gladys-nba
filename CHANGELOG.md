@@ -25,5 +25,7 @@ the notes of the version's GitHub Release.
 - A "Synchronize now" button reporting, user by user, the games added and the
   games left out by the window.
 
-[Unreleased]: https://github.com/quentinlegay/gladys-nba/compare/v1.0.1...HEAD
-[1.0.1]: https://github.com/quentinlegay/gladys-nba/releases/tag/v1.0.1
+### Fixed
+
+- ESPN answered HTTP 400 to the multi-week date range: the schedule is now
+  read day by day.
