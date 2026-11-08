@@ -1,0 +1,596 @@
+{
+  "leagues": [
+    {
+      "abbreviation": "NBA"
+    }
+  ],
+  "events": [
+    {
+      "id": "401800005",
+      "date": "2026-11-07T22:00Z",
+      "name": "Los Angeles Lakers at Denver Nuggets",
+      "competitions": [
+        {
+          "id": "401800005",
+          "date": "2026-11-07T22:00Z",
+          "status": {
+            "type": {
+              "name": "STATUS_FINAL",
+              "state": "post",
+              "completed": true,
+              "shortDetail": ""
+            }
+          },
+          "competitors": [
+            {
+              "id": "DEN",
+              "homeAway": "home",
+              "team": {
+                "id": "DEN",
+                "abbreviation": "DEN",
+                "displayName": "Denver Nuggets",
+                "shortDisplayName": "Nuggets",
+                "name": "Nuggets",
+                "location": "Denver"
+              },
+              "score": "112",
+              "winner": true
+            },
+            {
+              "id": "LAL",
+              "homeAway": "away",
+              "team": {
+                "id": "LAL",
+                "abbreviation": "LAL",
+                "displayName": "Los Angeles Lakers",
+                "shortDisplayName": "Lakers",
+                "name": "Lakers",
+                "location": "Los Angeles"
+              },
+              "score": "108",
+              "winner": false
+            }
+          ],
+          "venue": {
+            "fullName": "Ball Arena",
+            "address": {
+              "city": "Denver"
+            }
+          },
+          "broadcasts": [
+            {
+              "market": "national",
+              "names": ["NBA TV"]
+            }
+          ]
+        }
+      ],
+      "status": {
+        "type": {
+          "name": "STATUS_FINAL",
+          "state": "post",
+          "completed": true,
+          "shortDetail": ""
+        }
+      },
+      "links": [
+        {
+          "rel": ["summary", "desktop", "event"],
+          "href": "https://www.espn.com/nba/game/_/gameId/401800005"
+        }
+      ]
+    },
+    {
+      "id": "401800001",
+      "date": "2026-11-08T03:30Z",
+      "name": "Boston Celtics at Los Angeles Lakers",
+      "competitions": [
+        {
+          "id": "401800001",
+          "date": "2026-11-08T03:30Z",
+          "status": {
+            "type": {
+              "name": "STATUS_SCHEDULED",
+              "state": "pre",
+              "completed": false,
+              "shortDetail": ""
+            }
+          },
+          "competitors": [
+            {
+              "id": "LAL",
+              "homeAway": "home",
+              "team": {
+                "id": "LAL",
+                "abbreviation": "LAL",
+                "displayName": "Los Angeles Lakers",
+                "shortDisplayName": "Lakers",
+                "name": "Lakers",
+                "location": "Los Angeles"
+              },
+              "score": "0"
+            },
+            {
+              "id": "BOS",
+              "homeAway": "away",
+              "team": {
+                "id": "BOS",
+                "abbreviation": "BOS",
+                "displayName": "Boston Celtics",
+                "shortDisplayName": "Celtics",
+                "name": "Celtics",
+                "location": "Boston"
+              },
+              "score": "0"
+            }
+          ],
+          "venue": {
+            "fullName": "Crypto.com Arena",
+            "address": {
+              "city": "Los Angeles"
+            }
+          },
+          "broadcasts": [
+            {
+              "market": "national",
+              "names": ["ESPN"]
+            }
+          ]
+        }
+      ],
+      "status": {
+        "type": {
+          "name": "STATUS_SCHEDULED",
+          "state": "pre",
+          "completed": false,
+          "shortDetail": ""
+        }
+      },
+      "links": [
+        {
+          "rel": ["summary", "desktop", "event"],
+          "href": "https://www.espn.com/nba/game/_/gameId/401800001"
+        }
+      ]
+    },
+    {
+      "id": "401800003",
+      "date": "2026-11-08T20:00Z",
+      "name": "San Antonio Spurs at Miami Heat",
+      "competitions": [
+        {
+          "id": "401800003",
+          "date": "2026-11-08T20:00Z",
+          "status": {
+            "type": {
+              "name": "STATUS_SCHEDULED",
+              "state": "pre",
+              "completed": false,
+              "shortDetail": ""
+            }
+          },
+          "competitors": [
+            {
+              "id": "MIA",
+              "homeAway": "home",
+              "team": {
+                "id": "MIA",
+                "abbreviation": "MIA",
+                "displayName": "Miami Heat",
+                "shortDisplayName": "Heat",
+                "name": "Heat",
+                "location": "Miami"
+              },
+              "score": "0"
+            },
+            {
+              "id": "SA",
+              "homeAway": "away",
+              "team": {
+                "id": "SA",
+                "abbreviation": "SA",
+                "displayName": "San Antonio Spurs",
+                "shortDisplayName": "Spurs",
+                "name": "Spurs",
+                "location": "San Antonio"
+              },
+              "score": "0"
+            }
+          ],
+          "venue": {
+            "fullName": "Kaseya Center",
+            "address": {
+              "city": "Miami"
+            }
+          },
+          "broadcasts": [
+            {
+              "market": "national",
+              "names": ["NBA TV", "ESPN"]
+            }
+          ],
+          "notes": [
+            {
+              "type": "event",
+              "headline": "NBA Cup"
+            }
+          ]
+        }
+      ],
+      "status": {
+        "type": {
+          "name": "STATUS_SCHEDULED",
+          "state": "pre",
+          "completed": false,
+          "shortDetail": ""
+        }
+      },
+      "links": [
+        {
+          "rel": ["summary", "desktop", "event"],
+          "href": "https://www.espn.com/nba/game/_/gameId/401800003"
+        }
+      ]
+    },
+    {
+      "id": "401800006",
+      "date": "2026-11-08T21:00Z",
+      "name": "Chicago Bulls at Detroit Pistons",
+      "competitions": [
+        {
+          "id": "401800006",
+          "date": "2026-11-08T21:00Z",
+          "status": {
+            "type": {
+              "name": "STATUS_CANCELED",
+              "state": "pre",
+              "completed": false,
+              "shortDetail": ""
+            }
+          },
+          "competitors": [
+            {
+              "id": "DET",
+              "homeAway": "home",
+              "team": {
+                "id": "DET",
+                "abbreviation": "DET",
+                "displayName": "Detroit Pistons",
+                "shortDisplayName": "Pistons",
+                "name": "Pistons",
+                "location": "Detroit"
+              },
+              "score": "0"
+            },
+            {
+              "id": "CHI",
+              "homeAway": "away",
+              "team": {
+                "id": "CHI",
+                "abbreviation": "CHI",
+                "displayName": "Chicago Bulls",
+                "shortDisplayName": "Bulls",
+                "name": "Bulls",
+                "location": "Chicago"
+              },
+              "score": "0"
+            }
+          ],
+          "venue": {
+            "fullName": "Little Caesars Arena",
+            "address": {
+              "city": "Detroit"
+            }
+          }
+        }
+      ],
+      "status": {
+        "type": {
+          "name": "STATUS_CANCELED",
+          "state": "pre",
+          "completed": false,
+          "shortDetail": ""
+        }
+      },
+      "links": [
+        {
+          "rel": ["summary", "desktop", "event"],
+          "href": "https://www.espn.com/nba/game/_/gameId/401800006"
+        }
+      ]
+    },
+    {
+      "id": "401800002",
+      "date": "2026-11-08T23:00Z",
+      "name": "New York Knicks at Orlando Magic",
+      "competitions": [
+        {
+          "id": "401800002",
+          "date": "2026-11-08T23:00Z",
+          "status": {
+            "type": {
+              "name": "STATUS_SCHEDULED",
+              "state": "pre",
+              "completed": false,
+              "shortDetail": ""
+            }
+          },
+          "competitors": [
+            {
+              "id": "ORL",
+              "homeAway": "home",
+              "team": {
+                "id": "ORL",
+                "abbreviation": "ORL",
+                "displayName": "Orlando Magic",
+                "shortDisplayName": "Magic",
+                "name": "Magic",
+                "location": "Orlando"
+              },
+              "score": "0"
+            },
+            {
+              "id": "NY",
+              "homeAway": "away",
+              "team": {
+                "id": "NY",
+                "abbreviation": "NY",
+                "displayName": "New York Knicks",
+                "shortDisplayName": "Knicks",
+                "name": "Knicks",
+                "location": "New York"
+              },
+              "score": "0"
+            }
+          ],
+          "venue": {
+            "fullName": "Kia Center",
+            "address": {
+              "city": "Orlando"
+            }
+          }
+        }
+      ],
+      "status": {
+        "type": {
+          "name": "STATUS_SCHEDULED",
+          "state": "pre",
+          "completed": false,
+          "shortDetail": ""
+        }
+      },
+      "links": [
+        {
+          "rel": ["summary", "desktop", "event"],
+          "href": "https://www.espn.com/nba/game/_/gameId/401800002"
+        }
+      ]
+    },
+    {
+      "id": "401800004",
+      "date": "2026-11-09T00:00Z",
+      "name": "Golden State Warriors at Philadelphia 76ers",
+      "competitions": [
+        {
+          "id": "401800004",
+          "date": "2026-11-09T00:00Z",
+          "status": {
+            "type": {
+              "name": "STATUS_SCHEDULED",
+              "state": "pre",
+              "completed": false,
+              "shortDetail": ""
+            }
+          },
+          "competitors": [
+            {
+              "id": "PHI",
+              "homeAway": "home",
+              "team": {
+                "id": "PHI",
+                "abbreviation": "PHI",
+                "displayName": "Philadelphia 76ers",
+                "shortDisplayName": "76ers",
+                "name": "76ers",
+                "location": "Philadelphia"
+              },
+              "score": "0"
+            },
+            {
+              "id": "GS",
+              "homeAway": "away",
+              "team": {
+                "id": "GS",
+                "abbreviation": "GS",
+                "displayName": "Golden State Warriors",
+                "shortDisplayName": "Warriors",
+                "name": "Warriors",
+                "location": "Golden State"
+              },
+              "score": "0"
+            }
+          ],
+          "venue": {
+            "fullName": "Xfinity Mobile Arena",
+            "address": {
+              "city": "Philadelphia"
+            }
+          }
+        }
+      ],
+      "status": {
+        "type": {
+          "name": "STATUS_SCHEDULED",
+          "state": "pre",
+          "completed": false,
+          "shortDetail": ""
+        }
+      },
+      "links": [
+        {
+          "rel": ["summary", "desktop", "event"],
+          "href": "https://www.espn.com/nba/game/_/gameId/401800004"
+        }
+      ]
+    },
+    {
+      "id": "401800007",
+      "date": "2026-11-09T19:30Z",
+      "name": "Portland Trail Blazers at Utah Jazz",
+      "competitions": [
+        {
+          "id": "401800007",
+          "date": "2026-11-09T19:30Z",
+          "status": {
+            "type": {
+              "name": "STATUS_POSTPONED",
+              "state": "pre",
+              "completed": false,
+              "shortDetail": ""
+            }
+          },
+          "competitors": [
+            {
+              "id": "UTAH",
+              "homeAway": "home",
+              "team": {
+                "id": "UTAH",
+                "abbreviation": "UTAH",
+                "displayName": "Utah Jazz",
+                "shortDisplayName": "Jazz",
+                "name": "Jazz",
+                "location": "Utah"
+              },
+              "score": "0"
+            },
+            {
+              "id": "POR",
+              "homeAway": "away",
+              "team": {
+                "id": "POR",
+                "abbreviation": "POR",
+                "displayName": "Portland Trail Blazers",
+                "shortDisplayName": "Trail Blazers",
+                "name": "Trail Blazers",
+                "location": "Portland Trail"
+              },
+              "score": "0"
+            }
+          ],
+          "venue": {
+            "fullName": "Delta Center",
+            "address": {
+              "city": "Salt Lake City"
+            }
+          }
+        }
+      ],
+      "status": {
+        "type": {
+          "name": "STATUS_POSTPONED",
+          "state": "pre",
+          "completed": false,
+          "shortDetail": ""
+        }
+      },
+      "links": [
+        {
+          "rel": ["summary", "desktop", "event"],
+          "href": "https://www.espn.com/nba/game/_/gameId/401800007"
+        }
+      ]
+    },
+    {
+      "id": "401800008",
+      "date": "2027-03-28T22:00Z",
+      "name": "Toronto Raptors at Brooklyn Nets",
+      "competitions": [
+        {
+          "id": "401800008",
+          "date": "2027-03-28T22:00Z",
+          "status": {
+            "type": {
+              "name": "STATUS_SCHEDULED",
+              "state": "pre",
+              "completed": false,
+              "shortDetail": ""
+            }
+          },
+          "competitors": [
+            {
+              "id": "BKN",
+              "homeAway": "home",
+              "team": {
+                "id": "BKN",
+                "abbreviation": "BKN",
+                "displayName": "Brooklyn Nets",
+                "shortDisplayName": "Nets",
+                "name": "Nets",
+                "location": "Brooklyn"
+              },
+              "score": "0"
+            },
+            {
+              "id": "TOR",
+              "homeAway": "away",
+              "team": {
+                "id": "TOR",
+                "abbreviation": "TOR",
+                "displayName": "Toronto Raptors",
+                "shortDisplayName": "Raptors",
+                "name": "Raptors",
+                "location": "Toronto"
+              },
+              "score": "0"
+            }
+          ],
+          "venue": {
+            "fullName": "Barclays Center",
+            "address": {
+              "city": "Brooklyn"
+            }
+          }
+        }
+      ],
+      "status": {
+        "type": {
+          "name": "STATUS_SCHEDULED",
+          "state": "pre",
+          "completed": false,
+          "shortDetail": ""
+        }
+      },
+      "links": [
+        {
+          "rel": ["summary", "desktop", "event"],
+          "href": "https://www.espn.com/nba/game/_/gameId/401800008"
+        }
+      ]
+    },
+    {
+      "id": "999",
+      "date": "not a date",
+      "competitions": [
+        {
+          "competitors": []
+        }
+      ]
+    },
+    {
+      "id": "998",
+      "competitions": [
+        {
+          "date": "2026-11-08T20:00Z",
+          "competitors": [
+            {
+              "homeAway": "home",
+              "team": {
+                "abbreviation": "MIL"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

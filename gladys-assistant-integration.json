@@ -1,0 +1,410 @@
+{
+  "manifest_version": 1,
+  "type": "calendar",
+  "name": "NBA",
+  "description": {
+    "en": "NBA games in your Gladys calendar, filtered on tip-off times that suit you.",
+    "fr": "Les matchs NBA dans votre calendrier Gladys, filtrés sur les horaires qui vous conviennent."
+  },
+  "version": "1.0.0",
+  "docker_image": "ghcr.io/quentinlegay/gladys-nba:1.0.0",
+  "gladys_version": ">=5.2.0",
+  "cover_image": "https://raw.githubusercontent.com/quentinlegay/gladys-nba/main/cover.png",
+  "categories": ["leisure", "services"],
+  "transports": ["cloud"],
+  "config_schema": [
+    {
+      "key": "about",
+      "type": "section",
+      "label": {
+        "en": "How it works",
+        "fr": "Fonctionnement"
+      },
+      "description": {
+        "en": "The NBA schedule comes from the public ESPN API: no account, no key. Every user enables the integration in the \"My calendars\" block and chooses their teams and tip-off times there: they get their own \"NBA\" calendar.",
+        "fr": "Le calendrier NBA vient de l'API publique d'ESPN : pas de compte, pas de clé. Chaque utilisateur active l'intégration dans le bloc « Mes calendriers » et y choisit ses équipes et ses horaires : il obtient son propre calendrier « NBA »."
+      },
+      "links": [
+        {
+          "url": "https://github.com/quentinlegay/gladys-nba/blob/main/docs/en.md",
+          "label": {
+            "en": "Documentation",
+            "fr": "Documentation (anglais)"
+          }
+        },
+        {
+          "url": "https://github.com/quentinlegay/gladys-nba/blob/main/docs/fr.md",
+          "label": {
+            "en": "Documentation (French)",
+            "fr": "Documentation"
+          }
+        }
+      ]
+    },
+    {
+      "key": "sync_interval",
+      "type": "number",
+      "label": {
+        "en": "Sync interval (minutes)",
+        "fr": "Intervalle de synchronisation (minutes)"
+      },
+      "description": {
+        "en": "How often the schedule is read on ESPN and the calendars updated (15 to 1440).",
+        "fr": "Fréquence de lecture du calendrier sur ESPN et de mise à jour des calendriers (15 à 1440)."
+      },
+      "placeholder": {
+        "en": "60",
+        "fr": "60"
+      },
+      "default": 60,
+      "min": 15,
+      "max": 1440
+    }
+  ],
+  "account_schema": [
+    {
+      "key": "intro",
+      "type": "section",
+      "label": {
+        "en": "Your NBA calendar",
+        "fr": "Votre calendrier NBA"
+      },
+      "description": {
+        "en": "Pick the teams you follow (none: every game) and the tip-off window: for instance \"until 00:00\" in Europe/Paris keeps only the games you can watch in the evening in France. Enable the integration: an \"NBA\" calendar appears in your Gladys calendars, private until you share it.",
+        "fr": "Choisissez les équipes que vous suivez (aucune : tous les matchs) et la plage d'horaires : par exemple « jusqu'à 00:00 » en Europe/Paris ne garde que les matchs visibles en soirée en France. Activez l'intégration : un calendrier « NBA » apparaît dans vos calendriers Gladys, privé tant que vous ne le partagez pas."
+      }
+    },
+    {
+      "key": "teams",
+      "type": "multi_select",
+      "label": {
+        "en": "Teams",
+        "fr": "Équipes"
+      },
+      "description": {
+        "en": "The games of these teams go into your calendar. Leave empty to get every NBA game.",
+        "fr": "Les matchs de ces équipes vont dans votre calendrier. Laissez vide pour avoir tous les matchs NBA."
+      },
+      "options": [
+        {
+          "value": "ATL",
+          "label": {
+            "en": "Atlanta Hawks (ATL)",
+            "fr": "Atlanta Hawks (ATL)"
+          }
+        },
+        {
+          "value": "BOS",
+          "label": {
+            "en": "Boston Celtics (BOS)",
+            "fr": "Boston Celtics (BOS)"
+          }
+        },
+        {
+          "value": "BKN",
+          "label": {
+            "en": "Brooklyn Nets (BKN)",
+            "fr": "Brooklyn Nets (BKN)"
+          }
+        },
+        {
+          "value": "CHA",
+          "label": {
+            "en": "Charlotte Hornets (CHA)",
+            "fr": "Charlotte Hornets (CHA)"
+          }
+        },
+        {
+          "value": "CHI",
+          "label": {
+            "en": "Chicago Bulls (CHI)",
+            "fr": "Chicago Bulls (CHI)"
+          }
+        },
+        {
+          "value": "CLE",
+          "label": {
+            "en": "Cleveland Cavaliers (CLE)",
+            "fr": "Cleveland Cavaliers (CLE)"
+          }
+        },
+        {
+          "value": "DAL",
+          "label": {
+            "en": "Dallas Mavericks (DAL)",
+            "fr": "Dallas Mavericks (DAL)"
+          }
+        },
+        {
+          "value": "DEN",
+          "label": {
+            "en": "Denver Nuggets (DEN)",
+            "fr": "Denver Nuggets (DEN)"
+          }
+        },
+        {
+          "value": "DET",
+          "label": {
+            "en": "Detroit Pistons (DET)",
+            "fr": "Detroit Pistons (DET)"
+          }
+        },
+        {
+          "value": "GS",
+          "label": {
+            "en": "Golden State Warriors (GS)",
+            "fr": "Golden State Warriors (GS)"
+          }
+        },
+        {
+          "value": "HOU",
+          "label": {
+            "en": "Houston Rockets (HOU)",
+            "fr": "Houston Rockets (HOU)"
+          }
+        },
+        {
+          "value": "IND",
+          "label": {
+            "en": "Indiana Pacers (IND)",
+            "fr": "Indiana Pacers (IND)"
+          }
+        },
+        {
+          "value": "LAC",
+          "label": {
+            "en": "LA Clippers (LAC)",
+            "fr": "LA Clippers (LAC)"
+          }
+        },
+        {
+          "value": "LAL",
+          "label": {
+            "en": "Los Angeles Lakers (LAL)",
+            "fr": "Los Angeles Lakers (LAL)"
+          }
+        },
+        {
+          "value": "MEM",
+          "label": {
+            "en": "Memphis Grizzlies (MEM)",
+            "fr": "Memphis Grizzlies (MEM)"
+          }
+        },
+        {
+          "value": "MIA",
+          "label": {
+            "en": "Miami Heat (MIA)",
+            "fr": "Miami Heat (MIA)"
+          }
+        },
+        {
+          "value": "MIL",
+          "label": {
+            "en": "Milwaukee Bucks (MIL)",
+            "fr": "Milwaukee Bucks (MIL)"
+          }
+        },
+        {
+          "value": "MIN",
+          "label": {
+            "en": "Minnesota Timberwolves (MIN)",
+            "fr": "Minnesota Timberwolves (MIN)"
+          }
+        },
+        {
+          "value": "NO",
+          "label": {
+            "en": "New Orleans Pelicans (NO)",
+            "fr": "New Orleans Pelicans (NO)"
+          }
+        },
+        {
+          "value": "NY",
+          "label": {
+            "en": "New York Knicks (NY)",
+            "fr": "New York Knicks (NY)"
+          }
+        },
+        {
+          "value": "OKC",
+          "label": {
+            "en": "Oklahoma City Thunder (OKC)",
+            "fr": "Oklahoma City Thunder (OKC)"
+          }
+        },
+        {
+          "value": "ORL",
+          "label": {
+            "en": "Orlando Magic (ORL)",
+            "fr": "Orlando Magic (ORL)"
+          }
+        },
+        {
+          "value": "PHI",
+          "label": {
+            "en": "Philadelphia 76ers (PHI)",
+            "fr": "Philadelphia 76ers (PHI)"
+          }
+        },
+        {
+          "value": "PHX",
+          "label": {
+            "en": "Phoenix Suns (PHX)",
+            "fr": "Phoenix Suns (PHX)"
+          }
+        },
+        {
+          "value": "POR",
+          "label": {
+            "en": "Portland Trail Blazers (POR)",
+            "fr": "Portland Trail Blazers (POR)"
+          }
+        },
+        {
+          "value": "SAC",
+          "label": {
+            "en": "Sacramento Kings (SAC)",
+            "fr": "Sacramento Kings (SAC)"
+          }
+        },
+        {
+          "value": "SA",
+          "label": {
+            "en": "San Antonio Spurs (SA)",
+            "fr": "San Antonio Spurs (SA)"
+          }
+        },
+        {
+          "value": "TOR",
+          "label": {
+            "en": "Toronto Raptors (TOR)",
+            "fr": "Toronto Raptors (TOR)"
+          }
+        },
+        {
+          "value": "UTAH",
+          "label": {
+            "en": "Utah Jazz (UTAH)",
+            "fr": "Utah Jazz (UTAH)"
+          }
+        },
+        {
+          "value": "WSH",
+          "label": {
+            "en": "Washington Wizards (WSH)",
+            "fr": "Washington Wizards (WSH)"
+          }
+        }
+      ]
+    },
+    {
+      "key": "timezone",
+      "type": "string",
+      "label": {
+        "en": "Time zone",
+        "fr": "Fuseau horaire"
+      },
+      "description": {
+        "en": "The tip-off window below is read in this time zone (IANA name, e.g. Europe/Paris, Europe/Brussels, America/Montreal).",
+        "fr": "La plage horaire ci-dessous est lue dans ce fuseau (nom IANA, ex. Europe/Paris, Europe/Brussels, America/Montreal)."
+      },
+      "placeholder": {
+        "en": "Europe/Paris",
+        "fr": "Europe/Paris"
+      },
+      "default": "Europe/Paris"
+    },
+    {
+      "key": "schedule",
+      "type": "section",
+      "label": {
+        "en": "Tip-off times",
+        "fr": "Horaires de début de match"
+      },
+      "description": {
+        "en": "Only the games starting between these two times (HH:MM, both included) are added. Leave the earliest time empty for \"from 06:00\", the latest empty for \"until 05:59\". Both empty: every game. Examples: latest 00:00 (European evening), earliest 18:00 and latest 23:00 (weekend and Christmas games).",
+        "fr": "Seuls les matchs qui commencent entre ces deux heures (HH:MM, incluses) sont ajoutés. Heure au plus tôt vide : « à partir de 06:00 » ; au plus tard vide : « jusqu'à 05:59 ». Les deux vides : tous les matchs. Exemples : au plus tard 00:00 (soirée européenne), au plus tôt 18:00 et au plus tard 23:00 (matchs du week-end et de Noël)."
+      }
+    },
+    {
+      "key": "earliest_time",
+      "type": "string",
+      "label": {
+        "en": "Earliest tip-off",
+        "fr": "Début au plus tôt"
+      },
+      "description": {
+        "en": "Optional, HH:MM. Empty: 06:00.",
+        "fr": "Facultatif, HH:MM. Vide : 06:00."
+      },
+      "placeholder": {
+        "en": "e.g. 18:00",
+        "fr": "ex. 18:00"
+      }
+    },
+    {
+      "key": "latest_time",
+      "type": "string",
+      "label": {
+        "en": "Latest tip-off",
+        "fr": "Début au plus tard"
+      },
+      "description": {
+        "en": "HH:MM, included. 00:00 keeps the games starting at midnight at the latest. Empty: 05:59.",
+        "fr": "HH:MM, incluse. 00:00 garde les matchs qui commencent au plus tard à minuit. Vide : 05:59."
+      },
+      "placeholder": {
+        "en": "e.g. 00:00",
+        "fr": "ex. 00:00"
+      },
+      "default": "00:00"
+    },
+    {
+      "key": "days_ahead",
+      "type": "number",
+      "label": {
+        "en": "Days ahead",
+        "fr": "Jours à l'avance"
+      },
+      "description": {
+        "en": "How many days of upcoming games the calendar holds (1 to 60).",
+        "fr": "Nombre de jours de matchs à venir dans le calendrier (1 à 60)."
+      },
+      "placeholder": {
+        "en": "21",
+        "fr": "21"
+      },
+      "default": 21,
+      "min": 1,
+      "max": 60
+    },
+    {
+      "key": "show_scores",
+      "type": "boolean",
+      "label": {
+        "en": "Show the final scores",
+        "fr": "Afficher les scores finaux"
+      },
+      "description": {
+        "en": "Write the score in the games already played. Off by default: no spoiler if you watch the replay the next morning.",
+        "fr": "Écrit le score dans les matchs déjà joués. Désactivé par défaut : pas de spoiler si vous regardez le replay le lendemain."
+      },
+      "default": false
+    }
+  ],
+  "actions": [
+    {
+      "key": "sync_now",
+      "label": {
+        "en": "Synchronize now",
+        "fr": "Synchroniser maintenant"
+      },
+      "description": {
+        "en": "Read the NBA schedule now and update the calendar of every user who enabled the integration.",
+        "fr": "Lit le calendrier NBA maintenant et met à jour le calendrier de chaque utilisateur ayant activé l'intégration."
+      },
+      "timeout_seconds": 60
+    }
+  ]
+}
