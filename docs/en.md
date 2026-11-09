@@ -29,6 +29,7 @@ calendar, with their own teams and times.
 | Latest tip-off   | `00:00`        | Latest start time, `HH:MM`, included.                            |
 | Days ahead       | 21             | Days of upcoming games in the calendar (1 to 60).                |
 | Show the scores  | no             | Writes the final score of the games played (beware of spoilers). |
+| Display          | all day        | All-day event or time slot, see below.                           |
 
 ### The tip-off window
 
@@ -52,11 +53,14 @@ October when the two countries do not change their clocks on the same day.
 
 ## The events
 
-- **Name**: `🏀 Celtics @ Lakers` (away @ home); `(postponed)` is added to a
-  postponed game. With "Show the scores", a finished game becomes
-  `🏀 Celtics 108 – 112 Lakers`.
-- **Duration**: none, the event marks the tip-off (a game starting at 22:30
-  no longer shows on two days).
+- **Display**, your choice:
+  - **all day** (default): `🏀 21:00 BOS @ LAL`, at the top of the game day,
+    with the tip-off time only, easy to read in the calendar view;
+  - **time slot**: `🏀 BOS @ LAL`, from the tip-off to an estimated end
+    (2 h 15), cut at 23:59 so an evening game does not spill onto the next day.
+- **Name**: away @ home abbreviations (the full names are in the
+  description); `(postponed)` is added to a postponed game. With "Show the
+  scores", a finished game becomes `🏀 BOS 108 – 112 LAL`.
 - **Location**: the arena and the city.
 - **Description**: both teams, the competition (NBA Cup, playoffs...), the
   tip-off in your time zone, the US TV channels.
@@ -70,7 +74,9 @@ the calendar. Events you create by hand in this calendar are never touched.
 
 The NBA calendar is a Gladys calendar like any other: once shared, the
 **A calendar event is coming** trigger can start a scene before every game
-(turn the TV on, dim the lights, send a message...).
+(turn the TV on, dim the lights, send a message...). Pick the **time slot**
+display then: an all-day event starts at midnight, so the trigger would fire
+the evening before, not before the game.
 
 ## Integration settings (administrator)
 

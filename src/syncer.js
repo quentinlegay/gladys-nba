@@ -85,12 +85,12 @@ export function createSyncer({ gladys, espn, now = Date.now }) {
         return { ...result, outcome: 'sync_off' };
       }
       const window = syncWindow(settings, at);
-      const { events, stats } = buildEvents(games, settings, {
+      const { events, ranges, stats } = buildEvents(games, settings, {
         language,
         window,
         eventId: (gameId) => gladys.externalId(gameKey(user.selector, gameId)),
       });
-      for (const chunk of splitWindow(window, events)) {
+      for (const chunk of splitWindow(window, events, (event) => ranges.get(event.external_id))) {
         await gladys.publishCalendarEvents(calendarId, chunk.events, {
           from: chunk.window.from.toISOString(),
           to: chunk.window.to.toISOString(),

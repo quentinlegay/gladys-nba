@@ -56,7 +56,7 @@ test('every enabled user gets their own NBA calendar, filtered their way', async
   // John: LAL @ DEN (23:00) and NY @ ORL (00:00); BOS @ LAL (04:30) is too late.
   assert.deepEqual(
     eventsOf(gladys, 'john').map((e) => e.name),
-    ['🏀 Lakers @ Nuggets', '🏀 Knicks @ Magic'],
+    ['🏀 23:00 LAL @ DEN', '🏀 00:00 NY @ ORL'],
   );
   // Jane: every game but the canceled one.
   assert.equal(eventsOf(gladys, 'jane').length, 6);
@@ -86,7 +86,7 @@ test('a resync prunes the games that no longer pass the filter', async () => {
   await syncer.sync('john');
   assert.deepEqual(
     eventsOf(gladys, 'john').map((e) => e.name),
-    ['🏀 Lakers @ Nuggets'],
+    ['🏀 23:00 LAL @ DEN'],
   );
 });
 
