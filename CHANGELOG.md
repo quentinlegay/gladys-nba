@@ -10,6 +10,8 @@ the notes of the version's GitHub Release.
 
 ## [Unreleased]
 
+## [1.0.4] - 2026-11-09
+
 ### Added
 
 - A "How games show in the calendar" setting: **all day** (default), a
@@ -58,5 +60,6 @@ the notes of the version's GitHub Release.
 - A "Synchronize now" button reporting, user by user, the games added and the
   games left out by the window.
 
-[Unreleased]: https://github.com/quentinlegay/gladys-nba/compare/v1.0.2...HEAD
+[Unreleased]: https://github.com/quentinlegay/gladys-nba/compare/v1.0.4...HEAD
+[1.0.4]: https://github.com/quentinlegay/gladys-nba/compare/v1.0.3...v1.0.4
 [1.0.2]: https://github.com/quentinlegay/gladys-nba/compare/v1.0.1...v1.0.2
