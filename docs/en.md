@@ -55,7 +55,8 @@ October when the two countries do not change their clocks on the same day.
 - **Name**: `🏀 Celtics @ Lakers` (away @ home); `(postponed)` is added to a
   postponed game. With "Show the scores", a finished game becomes
   `🏀 Celtics 108 – 112 Lakers`.
-- **Duration**: 2 h 30.
+- **Duration**: none, the event marks the tip-off (a game starting at 22:30
+  no longer shows on two days).
 - **Location**: the arena and the city.
 - **Description**: both teams, the competition (NBA Cup, playoffs...), the
   tip-off in your time zone, the US TV channels.

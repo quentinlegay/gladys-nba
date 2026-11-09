@@ -17,8 +17,10 @@ import { formatTime, startsInWindow } from './schedule.js';
 
 const DAY_MS = 24 * 60 * 60 * 1000;
 
-// An NBA game lasts about 2 h 15 min; the calendar blocks 2 h 30 min.
-export const GAME_DURATION_MS = 150 * 60 * 1000;
+// An event has no duration (its end is its tip-off): a 2 h 30 block starting
+// in the European evening would cross midnight and show on two days, and only
+// the tip-off matters (the calendar scene trigger reads the start).
+export const GAME_DURATION_MS = 0;
 
 // Core limit: 500 events per publishCalendarEvents request.
 export const MAX_EVENTS_PER_REQUEST = 500;
@@ -150,7 +152,10 @@ export function syncWindow(settings, now) {
 function overlaps(event, window) {
   const start = Date.parse(event.start);
   const end = Date.parse(event.end);
-  return start < window.to.getTime() && end > window.from.getTime();
+  // The core's overlap rule: a zero-duration event at `from` overlaps too.
+  return (
+    start < window.to.getTime() && (end > window.from.getTime() || start >= window.from.getTime())
+  );
 }
 
 /**

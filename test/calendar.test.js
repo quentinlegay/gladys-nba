@@ -4,7 +4,6 @@ import { readFile } from 'node:fs/promises';
 import { parseScoreboard } from '../src/espn/parse.js';
 import { normalizeAccount } from '../src/config.js';
 import {
-  GAME_DURATION_MS,
   buildEvents,
   calendarInfo,
   eventDescription,
@@ -64,13 +63,13 @@ test('an evening-only window, read in another time zone', () => {
   assert.deepEqual(idsOf(events), ['401800002', '401800004']);
 });
 
-test('the window bounds the events, the game blocks 2 h 30', () => {
+test('the window bounds the events, which have no duration', () => {
   const { events } = build({ latest_time: '', days_ahead: 1 });
   const window = syncWindow(normalizeAccount({ days_ahead: 1 }), NOW);
   for (const event of events) {
     assert.ok(Date.parse(event.start) < window.to.getTime());
-    assert.ok(Date.parse(event.end) > window.from.getTime());
-    assert.equal(Date.parse(event.end) - Date.parse(event.start), GAME_DURATION_MS);
+    assert.ok(Date.parse(event.start) >= window.from.getTime());
+    assert.equal(event.end, event.start, 'end = tip-off: shown on one day only');
   }
   assert.ok(!idsOf(events).includes('401800007'), 'the game of Nov 9 evening is beyond one day');
 });
@@ -147,7 +146,7 @@ test('splitWindow keeps requests under the limit, straddling events in both halv
   const window = { from: new Date('2026-11-01T00:00:00Z'), to: new Date('2026-11-03T00:00:00Z') };
   const event = (iso) => ({
     start: iso,
-    end: new Date(Date.parse(iso) + GAME_DURATION_MS).toISOString(),
+    end: new Date(Date.parse(iso) + 150 * 60 * 1000).toISOString(),
   });
   const events = [
     event('2026-11-01T10:00:00Z'),
@@ -163,4 +162,19 @@ test('splitWindow keeps requests under the limit, straddling events in both halv
   );
   assert.equal(chunks[0].window.to.toISOString(), '2026-11-02T00:00:00.000Z');
   assert.equal(chunks[1].window.from.toISOString(), '2026-11-02T00:00:00.000Z');
+});
+
+test('a zero-duration event on a boundary goes into the later sub-window only', () => {
+  const window = { from: new Date('2026-11-01T00:00:00Z'), to: new Date('2026-11-03T00:00:00Z') };
+  const at = (iso) => ({ start: iso, end: iso });
+  const events = [
+    at('2026-11-01T00:00:00Z'),
+    at('2026-11-02T00:00:00Z'),
+    at('2026-11-02T10:00:00Z'),
+  ];
+  const chunks = splitWindow(window, events, 2);
+  assert.deepEqual(
+    chunks.map((chunk) => chunk.events.map((e) => e.start)),
+    [['2026-11-01T00:00:00Z'], ['2026-11-02T00:00:00Z', '2026-11-02T10:00:00Z']],
+  );
 });

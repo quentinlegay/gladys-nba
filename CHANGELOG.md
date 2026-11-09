@@ -10,6 +10,11 @@ the notes of the version's GitHub Release.
 
 ## [Unreleased]
 
+### Fixed
+
+- The events have no duration any more (end = tip-off): an evening game no
+  longer shows on two days in the calendar.
+
 ## [1.0.1] - 2026-11-08
 
 ### Added
