@@ -8,12 +8,21 @@ Describe each change under `## [Unreleased]` as you make it. The Release
 workflow moves that section under the version it ships, and the section becomes
 the notes of the version's GitHub Release.
 
-## [Unreleased]
+## [1.0.3] - 2026-11-09
 
 ### Fixed
 
-- The events have no duration any more (end = tip-off): an evening game no
-  longer shows on two days in the calendar.
+- Games starting in the European evening (e.g. 22:30, Paris time) no longer
+  show on two days in the calendar: each event now marks the tip-off only
+  (no duration). The existing events are updated at the next sync, without
+  duplicates.
+
+## [1.0.2] - 2026-11-08
+
+### Fixed
+
+- ESPN answered HTTP 400 to the multi-week date range: the schedule is now
+  read day by day.
 
 ## [1.0.1] - 2026-11-08
 
@@ -30,7 +39,5 @@ the notes of the version's GitHub Release.
 - A "Synchronize now" button reporting, user by user, the games added and the
   games left out by the window.
 
-### Fixed
-
-- ESPN answered HTTP 400 to the multi-week date range: the schedule is now
-  read day by day.
+[Unreleased]: https://github.com/quentinlegay/gladys-nba/compare/v1.0.2...HEAD
+[1.0.2]: https://github.com/quentinlegay/gladys-nba/compare/v1.0.1...v1.0.2

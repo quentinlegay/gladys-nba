@@ -6,8 +6,8 @@
     "en": "NBA games in your Gladys calendar, filtered on tip-off times that suit you.",
     "fr": "Les matchs NBA dans votre calendrier Gladys, filtrés sur les horaires qui vous conviennent."
   },
-  "version": "1.0.1",
-  "docker_image": "ghcr.io/quentinlegay/gladys-nba:1.0.1",
+  "version": "1.0.2",
+  "docker_image": "ghcr.io/quentinlegay/gladys-nba:1.0.2",
   "gladys_version": ">=5.2.0",
   "cover_image": "https://raw.githubusercontent.com/quentinlegay/gladys-nba/main/cover.png",
   "categories": ["leisure", "services"],
