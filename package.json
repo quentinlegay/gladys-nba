@@ -1,6 +1,6 @@
 {
   "name": "gladys-nba",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "private": true,
   "description": "Gladys Assistant external integration: NBA games in your Gladys calendar, filtered on European-friendly tip-off times.",
   "type": "module",
