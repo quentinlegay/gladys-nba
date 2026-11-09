@@ -56,7 +56,8 @@ même jour.
 - **Nom** : `🏀 Celtics @ Lakers` (extérieur @ domicile) ; `(reporté)` est
   ajouté à un match reporté. Avec « Afficher les scores », un match terminé
   devient `🏀 Celtics 108 – 112 Lakers`.
-- **Durée** : 2 h 30.
+- **Durée** : aucune, l'événement marque le coup d'envoi (un match à 22:30
+  n'apparaît plus sur deux jours).
 - **Lieu** : la salle et la ville.
 - **Description** : les deux équipes, la compétition (NBA Cup, playoffs…), le
   coup d'envoi dans votre fuseau, les chaînes de télévision américaines.
