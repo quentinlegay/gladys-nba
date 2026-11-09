@@ -380,6 +380,36 @@
       "max": 60
     },
     {
+      "key": "event_style",
+      "type": "select",
+      "display": "radio",
+      "label": {
+        "en": "How games show in the calendar",
+        "fr": "Affichage des matchs dans le calendrier"
+      },
+      "description": {
+        "en": "All day: \"🏀 21:00 BOS @ LAL\" in the all-day row, one time only, easy to read. Time slot: from the tip-off to an estimated end (2 h 15, at 23:59 at the latest), for scenes triggered before the game.",
+        "fr": "Journée entière : « 🏀 21:00 BOS @ LAL » en haut du jour, une seule heure, bien lisible. Créneau horaire : du coup d’envoi à une fin estimée (2 h 15, 23:59 au plus tard), pour des scènes déclenchées avant le match."
+      },
+      "default": "all_day",
+      "options": [
+        {
+          "value": "all_day",
+          "label": {
+            "en": "All day, tip-off time in the title",
+            "fr": "Journée entière, heure dans le titre"
+          }
+        },
+        {
+          "value": "timed",
+          "label": {
+            "en": "Time slot",
+            "fr": "Créneau horaire"
+          }
+        }
+      ]
+    },
+    {
       "key": "show_scores",
       "type": "boolean",
       "label": {

@@ -8,6 +8,8 @@ import {
   calendarInfo,
   eventDescription,
   eventName,
+  eventTiming,
+  localDate,
   languageOf,
   splitWindow,
   syncWindow,
@@ -63,32 +65,76 @@ test('an evening-only window, read in another time zone', () => {
   assert.deepEqual(idsOf(events), ['401800002', '401800004']);
 });
 
-test('the window bounds the events, which have no duration', () => {
-  const { events } = build({ latest_time: '', days_ahead: 1 });
+test('all-day events (default): the game day, the tip-off in the title', () => {
+  const { events } = build({ latest_time: '' });
+  const nyOrl = events.find((e) => e.external_id.endsWith(':401800002'));
+  // Tip-off 2026-11-08T23:00Z is Monday 00:00 in Paris: the event is Monday.
+  assert.equal(nyOrl.full_day, true);
+  assert.equal(nyOrl.start, '2026-11-09');
+  assert.equal(nyOrl.end, '2026-11-10', 'exclusive end: one single day');
+  assert.equal(nyOrl.name, '🏀 00:00 NY @ ORL');
+  const saMia = events.find((e) => e.external_id.endsWith(':401800003'));
+  assert.equal(saMia.start, '2026-11-08');
+  assert.equal(saMia.name, '🏀 21:00 SA @ MIA');
+});
+
+test('timed events: tip-off to an estimated end, never past 23:59', () => {
+  const { events } = build({ latest_time: '', event_style: 'timed' });
+  const byId = (id) => events.find((e) => e.external_id.endsWith(`:${id}`));
+  // 21:00 Paris: 2 h 15 fits in the day.
+  assert.equal(byId('401800003').start, '2026-11-08T20:00:00.000Z');
+  assert.equal(byId('401800003').end, '2026-11-08T22:15:00.000Z');
+  assert.equal(byId('401800003').full_day, undefined);
+  assert.equal(byId('401800003').name, '🏀 SA @ MIA', 'the calendar already shows the time');
+  // 23:00 Paris: cut at 23:59.
+  assert.equal(byId('401800005').end, '2026-11-07T22:59:00.000Z');
+  // 00:00 and 04:30 Paris: night games keep their 2 h 15.
+  assert.equal(byId('401800002').end, '2026-11-09T01:15:00.000Z');
+  assert.equal(byId('401800001').end, '2026-11-08T05:45:00.000Z');
+});
+
+test('eventTiming handles the daylight saving time change of the zone', () => {
+  // Paris switches to winter time on 2026-10-25: a 23:30 game that evening.
+  const { fields, range } = eventTiming('2026-10-25T22:30:00Z', 'all_day', 'Europe/Paris');
+  assert.deepEqual(fields, { start: '2026-10-25', end: '2026-10-26', full_day: true });
+  assert.ok(range.start <= Date.parse('2026-10-25T22:30:00Z') && range.end > range.start);
+  assert.equal(localDate('2026-11-08T23:30:00Z', 'Europe/Paris'), '2026-11-09');
+});
+
+test('the window bounds the games by their tip-off', () => {
+  const { events } = build({ latest_time: '', days_ahead: 1, event_style: 'timed' });
   const window = syncWindow(normalizeAccount({ days_ahead: 1 }), NOW);
   for (const event of events) {
     assert.ok(Date.parse(event.start) < window.to.getTime());
     assert.ok(Date.parse(event.start) >= window.from.getTime());
-    assert.equal(event.end, event.start, 'end = tip-off: shown on one day only');
   }
   assert.ok(!idsOf(events).includes('401800007'), 'the game of Nov 9 evening is beyond one day');
 });
 
-test('event texts: away @ home, postponed flag, no spoiler unless asked', () => {
+test('event texts: abbreviations, postponed flag, no spoiler unless asked', () => {
   const played = gameById('401800005');
-  assert.equal(eventName(played, { language: 'fr', showScores: false }), '🏀 Lakers @ Nuggets');
+  const paris = { timezone: 'Europe/Paris' };
   assert.equal(
-    eventName(played, { language: 'en', showScores: true }),
-    '🏀 Lakers 108 – 112 Nuggets',
+    eventName(played, { ...paris, language: 'fr', showScores: false }),
+    '🏀 23:00 LAL @ DEN',
   );
   assert.equal(
-    eventName(gameById('401800007'), { language: 'fr', showScores: false }),
-    '🏀 Trail Blazers @ Jazz (reporté)',
+    eventName(played, { ...paris, language: 'en', showScores: true }),
+    '🏀 LAL 108 – 112 DEN',
   );
   assert.equal(
-    eventName(gameById('401800001'), { language: 'en', showScores: true }),
-    '🏀 Celtics @ Lakers',
-    'no score before the game',
+    eventName(gameById('401800007'), { ...paris, language: 'fr', showScores: false }),
+    '🏀 20:30 POR @ UTAH (reporté)',
+  );
+  assert.equal(
+    eventName(gameById('401800001'), {
+      ...paris,
+      language: 'en',
+      showScores: true,
+      style: 'timed',
+    }),
+    '🏀 BOS @ LAL',
+    'no score before the game, no time on a timed event',
   );
 
   const fr = eventDescription(gameById('401800003'), {
@@ -144,37 +190,31 @@ test('languageOf picks French for fr users, English otherwise', () => {
 
 test('splitWindow keeps requests under the limit, straddling events in both halves', () => {
   const window = { from: new Date('2026-11-01T00:00:00Z'), to: new Date('2026-11-03T00:00:00Z') };
-  const event = (iso) => ({
-    start: iso,
-    end: new Date(Date.parse(iso) + 150 * 60 * 1000).toISOString(),
+  const event = (iso, minutes) => ({
+    start: Date.parse(iso),
+    end: Date.parse(iso) + minutes * 60_000,
   });
   const events = [
-    event('2026-11-01T10:00:00Z'),
-    event('2026-11-01T23:00:00Z'), // straddles the middle (Nov 2, 00:00)
-    event('2026-11-02T10:00:00Z'),
+    event('2026-11-01T10:00:00Z', 135),
+    event('2026-11-01T23:00:00Z', 135), // straddles the middle (Nov 2, 00:00)
+    event('2026-11-02T10:00:00Z', 135),
   ];
-  assert.equal(splitWindow(window, events, 10).length, 1);
-  const chunks = splitWindow(window, events, 2);
-  assert.equal(chunks.length, 2);
+  const rangeOf = (e) => e;
+  assert.equal(splitWindow(window, events, rangeOf, 10).length, 1);
+  const chunks = splitWindow(window, events, rangeOf, 2);
   assert.deepEqual(
     chunks.map((chunk) => chunk.events.length),
     [2, 2],
   );
   assert.equal(chunks[0].window.to.toISOString(), '2026-11-02T00:00:00.000Z');
   assert.equal(chunks[1].window.from.toISOString(), '2026-11-02T00:00:00.000Z');
-});
 
-test('a zero-duration event on a boundary goes into the later sub-window only', () => {
-  const window = { from: new Date('2026-11-01T00:00:00Z'), to: new Date('2026-11-03T00:00:00Z') };
-  const at = (iso) => ({ start: iso, end: iso });
-  const events = [
-    at('2026-11-01T00:00:00Z'),
-    at('2026-11-02T00:00:00Z'),
-    at('2026-11-02T10:00:00Z'),
-  ];
-  const chunks = splitWindow(window, events, 2);
+  // A zero-length range on a boundary belongs to the later sub-window only.
+  const points = ['2026-11-01T00:00:00Z', '2026-11-02T00:00:00Z', '2026-11-02T10:00:00Z'].map(
+    (iso) => event(iso, 0),
+  );
   assert.deepEqual(
-    chunks.map((chunk) => chunk.events.map((e) => e.start)),
-    [['2026-11-01T00:00:00Z'], ['2026-11-02T00:00:00Z', '2026-11-02T10:00:00Z']],
+    splitWindow(window, points, rangeOf, 2).map((chunk) => chunk.events.length),
+    [1, 2],
   );
 });

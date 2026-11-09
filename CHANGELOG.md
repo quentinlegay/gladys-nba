@@ -8,6 +8,25 @@ Describe each change under `## [Unreleased]` as you make it. The Release
 workflow moves that section under the version it ships, and the section becomes
 the notes of the version's GitHub Release.
 
+## [Unreleased]
+
+### Added
+
+- A "How games show in the calendar" setting: **all day** (default), a
+  full-day event titled with the tip-off time ("🏀 21:00 BOS @ LAL"), or
+  **time slot**, from the tip-off to an estimated end (2 h 15, cut at 23:59),
+  for scenes triggered before the game.
+
+### Changed
+
+- Event titles use the team abbreviations ("BOS @ LAL"): the opponent stays
+  visible in the calendar cells; the full names are in the description.
+
+### Fixed
+
+- The calendar no longer shows meaningless "19:00 – 19:00" times, and the
+  game entries are readable again in the calendar view.
+
 ## [1.0.3] - 2026-11-09
 
 ### Fixed

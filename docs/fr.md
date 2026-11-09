@@ -21,14 +21,15 @@ propre calendrier, avec ses propres équipes et horaires.
 
 ## Réglages de votre calendrier
 
-| Réglage             | Par défaut     | Rôle                                                                         |
-| ------------------- | -------------- | ---------------------------------------------------------------------------- |
-| Équipes             | aucune         | Les matchs de ces équipes (domicile ou extérieur). Aucune : tous les matchs. |
-| Fuseau horaire      | `Europe/Paris` | Fuseau dans lequel la plage horaire est lue (nom IANA).                      |
-| Début au plus tôt   | vide (06:00)   | Heure de début minimale, `HH:MM`.                                            |
-| Début au plus tard  | `00:00`        | Heure de début maximale, `HH:MM`, incluse.                                   |
-| Jours à l'avance    | 21             | Nombre de jours de matchs à venir (1 à 60).                                  |
-| Afficher les scores | non            | Écrit le score final des matchs joués (attention aux spoilers).              |
+| Réglage              | Par défaut      | Rôle                                                                         |
+| -------------------- | --------------- | ---------------------------------------------------------------------------- |
+| Équipes              | aucune          | Les matchs de ces équipes (domicile ou extérieur). Aucune : tous les matchs. |
+| Fuseau horaire       | `Europe/Paris`  | Fuseau dans lequel la plage horaire est lue (nom IANA).                      |
+| Début au plus tôt    | vide (06:00)    | Heure de début minimale, `HH:MM`.                                            |
+| Début au plus tard   | `00:00`         | Heure de début maximale, `HH:MM`, incluse.                                   |
+| Jours à l'avance     | 21              | Nombre de jours de matchs à venir (1 à 60).                                  |
+| Afficher les scores  | non             | Écrit le score final des matchs joués (attention aux spoilers).              |
+| Affichage des matchs | journée entière | Journée entière ou créneau horaire, voir ci-dessous.                         |
 
 ### La plage horaire
 
@@ -53,11 +54,15 @@ même jour.
 
 ## Les événements
 
-- **Nom** : `🏀 Celtics @ Lakers` (extérieur @ domicile) ; `(reporté)` est
-  ajouté à un match reporté. Avec « Afficher les scores », un match terminé
-  devient `🏀 Celtics 108 – 112 Lakers`.
-- **Durée** : aucune, l'événement marque le coup d'envoi (un match à 22:30
-  n'apparaît plus sur deux jours).
+- **Affichage**, au choix :
+  - **journée entière** (par défaut) : `🏀 21:00 BOS @ LAL`, en haut du jour du
+    match, avec seulement l'heure de début, bien lisible dans la vue calendrier ;
+  - **créneau horaire** : `🏀 BOS @ LAL`, du coup d'envoi à une fin estimée
+    (2 h 15), arrêté à 23:59 pour qu'un match du soir ne déborde pas sur le
+    lendemain.
+- **Nom** : abréviations extérieur @ domicile (les noms complets sont dans la
+  description) ; `(reporté)` est ajouté à un match reporté. Avec « Afficher
+  les scores », un match terminé devient `🏀 BOS 108 – 112 LAL`.
 - **Lieu** : la salle et la ville.
 - **Description** : les deux équipes, la compétition (NBA Cup, playoffs…), le
   coup d'envoi dans votre fuseau, les chaînes de télévision américaines.
@@ -73,7 +78,9 @@ calendrier ne sont jamais touchés.
 Le calendrier NBA est un calendrier Gladys comme les autres : une fois partagé,
 le déclencheur **Un événement de calendrier va commencer** peut lancer une
 scène avant chaque match (allumer la télé, tamiser les lumières, envoyer un
-message…).
+message…). Choisissez alors l'affichage **créneau horaire** : un événement
+« journée entière » commence à minuit, le déclencheur partirait donc la veille
+au soir et non avant le match.
 
 ## Réglages de l'intégration (administrateur)
 

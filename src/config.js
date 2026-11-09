@@ -31,7 +31,11 @@ export const DEFAULT_ACCOUNT = {
   latest_time: '00:00',
   days_ahead: 21,
   show_scores: false,
+  event_style: 'all_day',
 };
+
+// How a game shows in the calendar, see src/calendar.js.
+export const EVENT_STYLES = ['all_day', 'timed'];
 
 export const DAYS_AHEAD_BOUNDS = { min: 1, max: 60 };
 
@@ -107,6 +111,9 @@ export function normalizeAccount(raw = {}) {
       DEFAULT_ACCOUNT.days_ahead,
     ),
     show_scores: raw.show_scores === true || raw.show_scores === 'true',
+    event_style: EVENT_STYLES.includes(raw.event_style)
+      ? raw.event_style
+      : DEFAULT_ACCOUNT.event_style,
     warnings,
   };
 }
