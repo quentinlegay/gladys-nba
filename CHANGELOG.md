@@ -10,6 +10,11 @@ the notes of the version's GitHub Release.
 
 ## [Unreleased]
 
+### Changed
+
+- A cover image of its own for the integration catalog (basketball and
+  calendar, original artwork).
+
 ## [1.0.4] - 2026-11-09
 
 ### Added
